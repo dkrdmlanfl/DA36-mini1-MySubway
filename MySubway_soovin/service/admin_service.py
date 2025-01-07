@@ -1,16 +1,19 @@
-#from MySubway_soovin.repository.admin_repo import AdminRepo
 from MySubway_soovin.repository.user_repo import UserRepo
+from MySubway_soovin.repository.order_repo import OrderRepo
 from MySubway_soovin.entity.user_entity import UserEntity
+import pickle
+
 
 class AdminService:
 
-#오더 르보에서 매출 데이터 가져오자
+    #오더 르포에서 매출 데이터 가져오자
     #순수익 #총매출만 구현하자. 총매출을 날자별로 확인해서 적립할 수 있도록.
     def __init__(self) :
         #self.admin_repo = AdminRepo()
-        self.total_price = [1000,2000,3000,4000,5000]
+        self.total_price = []
         self.allsales = sum(self.total_price)
         self.user_repo = UserRepo()
+        self.order_repo = OrderRepo(self.total_price)
 
     def add_user(self, user_id=None, login_id=None, user_name=None, user_gender=None, user_birth=None, my_menu=None):
 
@@ -40,7 +43,7 @@ class AdminService:
     #총매출
     def total_sales(self):
 
-        self.total_sales = self.allsales
+
         print(f'총 매출은 {self.total_sales}원 입니다.')
 
     def pure_earn(self):
